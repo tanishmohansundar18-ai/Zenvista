@@ -1,0 +1,117 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:black;
+    color:white;
+}
+
+.screen{
+    display:none;
+    min-height:100vh;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    padding:20px;
+}
+
+.active{
+    display:flex;
+}
+
+#welcomeScreen{
+    background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1600') no-repeat center center/cover;
+}
+
+.overlay{
+    background:rgba(0,0,0,0.5);
+    padding:40px;
+    border-radius:15px;
+}
+
+h1{
+    font-size:70px;
+    margin-bottom:30px;
+}
+
+h2{
+    font-size:40px;
+    margin-bottom:30px;
+}
+
+button{
+    padding:15px 35px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:gold;
+    color:black;
+    font-size:18px;
+    margin-top:20px;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.resort-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    width:100%;
+    max-width:1000px;
+}
+
+.resort-btn{
+    background:#111;
+    color:white;
+    padding:30px;
+    border:2px solid gold;
+}
+
+.resort-btn h3{
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.resort-btn p{
+    font-size:20px;
+}
+
+input{
+    padding:12px;
+    width:250px;
+    margin:15px;
+    border-radius:10px;
+    border:none;
+    font-size:16px;
+}
+
+.room-option{
+    background:#111;
+    border:2px solid gold;
+    padding:30px;
+    margin:15px;
+    border-radius:15px;
+    width:300px;
+}
+
+.receipt{
+    background:#111;
+    padding:40px;
+    border-radius:20px;
+    width:400px;
+    line-height:2;
+    border:2px solid gold;
+}
+
+.receipt h3{
+    margin-top:20px;
+    color:gold;
+}
