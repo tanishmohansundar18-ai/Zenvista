@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zenvista Resorts</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Screen 1 -->
+    <section class="screen active" id="welcomeScreen">
+        <div class="overlay">
+            <h1>Welcome to Zenvista</h1>
+            <button onclick="nextScreen('resortScreen')">Proceed</button>
+        </div>
+    </section>
+
+    <!-- Screen 2 -->
+    <section class="screen" id="resortScreen">
+        <h2>Select Your Resort</h2>
+
+        <div class="resort-grid">
+
+            <button class="resort-btn" onclick="selectResort('London')">
+                <h3>Zenvista</h3>
+                <p>London</p>
+            </button>
+
+            <button class="resort-btn" onclick="selectResort('Sydney')">
+                <h3>Zenvista</h3>
+                <p>Sydney</p>
+            </button>
+
+            <button class="resort-btn" onclick="selectResort('Maldives')">
+                <h3>Zenvista</h3>
+                <p>Maldives</p>
+            </button>
+
+            <button class="resort-btn" onclick="selectResort('Mauritius')">
+                <h3>Zenvista</h3>
+                <p>Mauritius</p>
+            </button>
+
+            <button class="resort-btn" onclick="selectResort('Tokyo')">
+                <h3>Zenvista</h3>
+                <p>Tokyo</p>
+            </button>
+
+            <button class="resort-btn" onclick="selectResort('New York')">
+                <h3>Zenvista</h3>
+                <p>New York</p>
+            </button>
+
+            <button class="resort-btn" onclick="selectResort('South Africa')">
+                <h3>Zenvista</h3>
+                <p>South Africa</p>
+            </button>
+
+        </div>
+    </section>
+
+    <!-- Screen 3 -->
+    <section class="screen" id="dateScreen">
+        <h2>Select Dates</h2>
+
+        <label>Arrival Date</label>
+        <input type="date" id="arrivalDate">
+
+        <label>Departure Date</label>
+        <input type="date" id="departureDate">
+
+        <button onclick="goToRoomSelection()">Continue</button>
+    </section>
+
+    <!-- Screen 4 -->
+    <section class="screen" id="roomScreen">
+        <h2>Select Room Type</h2>
+
+        <div id="roomOptions"></div>
+    </section>
+
+    <!-- Screen 5 -->
+    <section class="screen" id="receiptScreen">
+        <h2>Booking Receipt</h2>
+
+        <div class="receipt">
+            <p><strong>Resort:</strong> <span id="receiptResort"></span></p>
+            <p><strong>Arrival:</strong> <span id="receiptArrival"></span></p>
+            <p><strong>Departure:</strong> <span id="receiptDeparture"></span></p>
+            <p><strong>Room Type:</strong> <span id="receiptRoom"></span></p>
+            <p><strong>Total Days:</strong> <span id="receiptDays"></span></p>
+            <p><strong>Price Per Day:</strong> $<span id="receiptPrice"></span></p>
+            <h3>Total Amount: $<span id="receiptTotal"></span></h3>
+        </div>
+    </section>
+
+<script src="script.js"></script>
+</body>
+</html>
