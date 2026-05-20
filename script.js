@@ -1,112 +1,253 @@
-let selectedResort = "";
-let selectedRoom = "";
-let pricePerDay = 0;
-
-function nextScreen(id){
-    document.querySelectorAll(".screen").forEach(screen=>{
-        screen.classList.remove("active");
-    });
-
-    document.getElementById(id).classList.add("active");
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
 }
 
-function selectResort(resort){
-    selectedResort = resort;
-    nextScreen("dateScreen");
+body{
+    overflow-x:hidden;
+    color:white;
 }
 
-function goToRoomSelection(){
-
-    const arrival = new Date(document.getElementById("arrivalDate").value);
-    const departure = new Date(document.getElementById("departureDate").value);
-
-    if(arrival == "Invalid Date" || departure == "Invalid Date"){
-        alert("Please select dates");
-        return;
-    }
-
-    const roomOptions = document.getElementById("roomOptions");
-
-    const beachResorts = ["Maldives","Mauritius","South Africa"];
-
-    if(beachResorts.includes(selectedResort)){
-
-        roomOptions.innerHTML = `
-            <div class="room-option">
-                <h3>Beach Villa</h3>
-                <p>$50 per day</p>
-                <button onclick="bookRoom('Beach Villa',50)">Select</button>
-            </div>
-
-            <div class="room-option">
-                <h3>Water Villa</h3>
-                <p>$65 per day</p>
-                <button onclick="bookRoom('Water Villa',65)">Select</button>
-            </div>
-        `;
-    }
-
-    else{
-
-        roomOptions.innerHTML = `
-            <div class="room-option">
-                <h3>Economy</h3>
-                <p>$35 per day</p>
-                <button onclick="bookRoom('Economy',35)">Select</button>
-            </div>
-
-            <div class="room-option">
-                <h3>Economy Plus</h3>
-                <p>$52 per day</p>
-                <button onclick="bookRoom('Economy Plus',52)">Select</button>
-            </div>
-
-            <div class="room-option">
-                <h3>Suite</h3>
-                <p>$70 per day</p>
-                <button onclick="bookRoom('Suite',70)">Select</button>
-            </div>
-        `;
-    }
-
-    nextScreen("roomScreen");
+.screen{
+    display:none;
+    min-height:100vh;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    padding:30px;
+    background-size:cover;
+    background-position:center;
+    position:relative;
 }
 
-function bookRoom(room,price){
+.screen::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.55);
+}
 
-    selectedRoom = room;
-    pricePerDay = price;
+.screen *{
+    position:relative;
+    z-index:2;
+}
 
-    const arrival = new Date(document.getElementById("arrivalDate").value);
-    const departure = new Date(document.getElementById("departureDate").value);
+.active{
+    display:flex;
+}
 
-    const days = (departure - arrival)/(1000*60*60*24);
+.beach-bg{
+    background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1600');
+}
 
-    let finalPrice = pricePerDay;
+.city-bg{
+    background-image:url('https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=1600');
+}
 
-    const today = new Date();
+/* HERO SECTION */
 
-    const oneMonth = 30*24*60*60*1000;
+.luxury-overlay{
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:40px 70px;
+}
 
-    if(arrival - today < oneMonth){
-        finalPrice += finalPrice * 0.15;
+.top-bar{
+    width:100%;
+    display:flex;
+    justify-content:flex-start;
+}
+
+.top-bar h3{
+    font-size:30px;
+    letter-spacing:4px;
+    color:gold;
+}
+
+.hero-content{
+    max-width:850px;
+    margin-bottom:120px;
+    text-align:left;
+}
+
+.small-text{
+    font-size:14px;
+    letter-spacing:4px;
+    margin-bottom:20px;
+}
+
+.hero-content h1{
+    font-size:120px;
+    line-height:1;
+    margin-bottom:30px;
+}
+
+.hero-description{
+    font-size:24px;
+    line-height:1.8;
+    margin-bottom:40px;
+    max-width:700px;
+}
+
+button{
+    padding:16px 40px;
+    border:none;
+    border-radius:12px;
+    background:gold;
+    color:black;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+h2{
+    font-size:55px;
+    margin-bottom:40px;
+}
+
+/* RESORT BUTTONS */
+
+.resort-grid{
+    width:100%;
+    max-width:1200px;
+
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
+    gap:25px;
+}
+
+.resort-btn{
+    background:rgba(0,0,0,0.65);
+    border:2px solid gold;
+    color:white;
+    padding:35px;
+    border-radius:20px;
+}
+
+.resort-btn h3{
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.resort-btn p{
+    font-size:22px;
+}
+
+/* FORM BOX */
+
+.form-box{
+    background:rgba(0,0,0,0.65);
+    padding:40px;
+    border-radius:20px;
+    width:350px;
+
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+input{
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+}
+
+/* ROOM OPTIONS */
+
+#roomOptions{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+}
+
+.room-option{
+    background:rgba(0,0,0,0.7);
+    border:2px solid gold;
+    padding:30px;
+    border-radius:20px;
+    width:320px;
+}
+
+.room-option h3{
+    font-size:30px;
+    margin-bottom:15px;
+}
+
+.room-option p{
+    margin-bottom:15px;
+    font-size:18px;
+}
+
+.room-option input{
+    width:100%;
+}
+
+/* FOOD SCREEN */
+
+.emoji{
+    font-size:70px;
+    margin-bottom:20px;
+}
+
+.food-text{
+    font-size:24px;
+    margin-bottom:30px;
+}
+
+/* RECEIPT */
+
+.receipt{
+    background:rgba(0,0,0,0.75);
+    border:2px solid gold;
+    border-radius:20px;
+    padding:40px;
+    width:500px;
+    line-height:2;
+    text-align:left;
+}
+
+.receipt h3{
+    text-align:center;
+    margin-top:20px;
+    color:gold;
+    font-size:30px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .luxury-overlay{
+        padding:30px;
     }
 
-    const month = arrival.getMonth();
-
-    if(month == 11){
-        finalPrice -= finalPrice * 0.05;
+    .hero-content{
+        margin-bottom:60px;
     }
 
-    const total = (finalPrice * days).toFixed(2);
+    .hero-content h1{
+        font-size:70px;
+    }
 
-    document.getElementById("receiptResort").innerText = selectedResort;
-    document.getElementById("receiptArrival").innerText = arrival.toDateString();
-    document.getElementById("receiptDeparture").innerText = departure.toDateString();
-    document.getElementById("receiptRoom").innerText = selectedRoom;
-    document.getElementById("receiptDays").innerText = days;
-    document.getElementById("receiptPrice").innerText = finalPrice.toFixed(2);
-    document.getElementById("receiptTotal").innerText = total;
+    .hero-description{
+        font-size:18px;
+    }
 
-    nextScreen("receiptScreen");
+    .receipt{
+        width:100%;
+    }
 }
